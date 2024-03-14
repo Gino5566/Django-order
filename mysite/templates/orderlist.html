@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>訂單列表</title>
+</head>
+<body>
+    <h1>訂單列表:</h1>
+    {% for order in orderlist %}
+        <h3 style="display: inline;">訂單編號:{{order.order_number}}</h3><br>
+        {% for orderitem in order.order_items.all %}
+            <h4 style="display: inline;">{{orderitem.name}}&nbsp;</h4>
+        {% empty %}
+            <label>沒有東西</label>
+        {% endfor %}
+        <br>
+        <form method="post" action="/order/orderdetail/{{ order.id }}/">
+            {% csrf_token %}
+            <input type="submit" value="查看">
+        </form>
+        <br><br><br>
+    {% empty %}
+        <label>沒有訂單</label>
+    {% endfor %}
+</body>

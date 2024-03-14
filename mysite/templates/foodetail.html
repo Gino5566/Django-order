@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ food.name }}</title>
+</head>
+<body>
+    <h2>{{ food }}</h2>
+    <h3>價格: ${{ food.price }}</h3>
+    <form method="post" action="/order/food/{{ food.id }}/">
+    <ul style="list-style-type: none;">
+        {% for option in food.options.all %}
+            <li>
+                <input type="checkbox" name="options" value="{{option.id}}">
+                <label>{{ option.name }}</label>
+            </li>
+        {% empty %}
+            <li>目前沒有備註</li>
+        {% endfor %}
+    </ul>
+    <br>
+        {% csrf_token %}
+        <input type="hidden" name="food_id" value="{{ food.id }}">
+        <label for="quantity">數量：</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
+        <br><br>
+        <input type="submit" value="下單">
+    </form>
+</body>
+</html>

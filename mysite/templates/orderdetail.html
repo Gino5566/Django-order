@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <title>訂單詳細</title>
+</head>
+<body>
+    <h1>訂單編號:{{orderdetail.order_number}}</h1>
+    <h3>訂單內容:</h3>
+    {% for orderitem in orderdetail.order_items.all %}
+        <h3 style="display: inline;">{{ orderitem.name }}</h3>
+        <h5 style="display: inline;">{{ orderitem.remark }}</h5><br>
+        <h4 style="display: inline;">數量:{{ orderitem.count }}&nbsp;&nbsp;${{ orderitem.subtotal }}&nbsp;&nbsp;</h4>
+        <br><br><br>
+    {% empty %}
+        <li>訂單為空</li>
+    {% endfor %}
+    <h2>訂單小計: {{orderdetail.total}}</h2>
+</body>

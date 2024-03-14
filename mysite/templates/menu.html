@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>點餐系統</title>
+</head>
+<body>
+    <h1>歡迎光臨點餐系統</h1>
+    <h2>菜單</h2>
+    <ul style="list-style-type: none;">
+        {% for food in food %}
+            <li><a href="/order/food/{{ food.id }}/">{{ food.name }}   ${{ food.price }}</a></li>
+        {% empty %}
+            <li>目前沒有食物</li>
+        {% endfor %}
+        {% for drink in drink %}
+            <li ><a href="/order/drink/{{ drink.id }}/">{{ drink.name }}   ${{ drink.price }}</a></li>
+        {% empty %}
+            <li>目前沒有飲料</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/order/shoppingcart/"><input type="submit" value="購物車"></a>
+    <label>訂單小計   ${{total}}</label>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <title>購物車</title>
+</head>
+<body>
+    <h1>購物車:</h1>
+    {% for shop in shopcart %}
+        <h3 style="display: inline;">{{ shop.name }}</h3>
+        <h5 style="display: inline;">{{ shop.remark }}</h5><br>
+        <h4 style="display: inline;">數量:{{ shop.count }}&nbsp;&nbsp;${{ shop.subtotal }}&nbsp;&nbsp;</h4>
+        <form style="display: inline;" method="post" action="/order/delete/{{ shop.id }}/">
+            {% csrf_token %}
+            <input type="submit" value="刪除">
+        </form>
+        <br><br><br>
+    {% empty %}
+        <li>購物車為空</li>
+    {% endfor %}
+        <h3>訂單小計   ${{total}}</h3>
+        <form method="post" action="/order/complete-order/">
+            {% csrf_token %}
+            <input type="submit" value="結帳">
+        </form>
+</body>

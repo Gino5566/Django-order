@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ drink.name }}</title>
+</head>
+<body>
+    <h2>{{ drink }}</h2>
+    <h3>價格: ${{ drink.price }}</h3>
+    <form method="post" action="/order/drink/{{ drink.id }}/">
+        {% csrf_token %}
+        <input type="hidden" name="drink_id" value="{{ drink.id }}">
+        <label>溫度：</label>
+        <input type="radio" id="hot" name="temperature" value="hot">
+        <label for="hot">熱的</label>
+        <input type="radio" id="cold" name="temperature" value="cold" checked>
+        <label for="cold">冰的</label>
+        <br><br>
+        <label>杯型：</label>
+        <input type="radio" id="short" name="size" value="short" checked>
+        <label for="short">小杯</label>
+        <input type="radio" id="tall" name="size" value="tall">
+        <label for="tall">大杯+5</label>
+        <br><br>
+        <label for="quantity">數量：</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
+        <br><br>
+        <input type="submit" value="下單">
+    </form>
+</body>
+</html>
